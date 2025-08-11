@@ -1,5 +1,7 @@
 [build]
-builder = "Dockerfile"
+builder = "Docker"
 
-[deploy]
-startCommand = "n8n"
+[env]
+N8N_PORT = "3000"
+N8N_HOST = "0.0.0.0"
+WEBHOOK_URL = "https://${RAILWAY_STATIC_URL}"
