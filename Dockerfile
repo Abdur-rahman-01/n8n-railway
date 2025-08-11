@@ -1,12 +1,14 @@
 FROM n8nio/n8n:latest
 
-# Remove the VOLUME instruction by re-building the image
-USER root
-RUN sed -i '/VOLUME/d' /usr/local/lib/node_modules/n8n/Dockerfile || true
+# Set default port & host so Railway can map it
+ENV N8N_PORT=3000
+ENV N8N_HOST=0.0.0.0
 
-# Set environment variables
-ENV NODE_ENV=production
+# Set the webhook URL (replace with your Railway subdomain later)
+# You can also leave this blank and set it in Railway dashboard
+ENV WEBHOOK_URL=https://${RAILWAY_STATIC_URL}
 
-# Run n8n
+# Expose port for Railway
+EXPOSE 3000
+
 CMD ["n8n", "start"]
- 
