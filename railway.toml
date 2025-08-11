@@ -1,3 +1,5 @@
-[env]
-N8N_HOST = "0.0.0.0"
-WEBHOOK_URL = "https://${RAILWAY_STATIC_URL}"
+[build]
+builder = "Docker"
+
+[deploy]
+startCommand = "n8n start --port ${PORT}"
