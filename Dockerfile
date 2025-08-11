@@ -1,8 +1,11 @@
 FROM n8nio/n8n:latest
 
-# Set timezone (optional)
-ENV GENERIC_TIMEZONE="Asia/Kolkata"
+# Remove the VOLUME instruction by re-building the image
+USER root
+RUN sed -i '/VOLUME/d' /usr/local/lib/node_modules/n8n/Dockerfile || true
 
-# Use Railway's /data volume for persistence
-ENV N8N_PATH="/data"
-VOLUME ["/data"]
+# Set environment variables
+ENV NODE_ENV=production
+
+# Run n8n
+CMD ["n8n", "start"]
